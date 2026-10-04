@@ -1,0 +1,165 @@
+<!DOCTYPE html><html><head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Potato Tool</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.19.0/css/xterm.css">
+        <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+        <link rel="icon" href="favicon.ee2246ac.ico">
+         <script src="https://cdn.jsdelivr.net/npm/xterm@4.19.0/lib/xterm.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js"></script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+		<style>#fileTable tr {
+  flex-direction: column;
+  display: flex;
+}
+
+#fileTable td {
+  width: 100%;
+  display: block;
+}
+
+#fileTable .progress-cell {
+  width: 100%;
+  padding-top: 8px;
+}
+
+#fileTable progress {
+  width: 100%;
+  height: 24px;
+  display: block;
+}
+
+@media (width <= 600px) {
+  body {
+    font-size: 18px;
+  }
+
+  .container {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 26px;
+  }
+
+  label {
+    font-size: 18px;
+  }
+
+  #baudrates {
+    height: 46px;
+    margin-left: 6px;
+    padding: 6px 10px;
+    font-size: 18px;
+  }
+
+  .btn-sm {
+    min-height: 50px;
+    margin: 5px 3px;
+    padding: 12px 16px;
+    font-size: 18px;
+  }
+
+  #programButton {
+    width: 100%;
+    min-height: 56px;
+    font-size: 20px;
+  }
+
+  #debugLogging {
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+  }
+
+  .form-check-label {
+    margin-left: 5px;
+    font-size: 16px;
+  }
+
+  .table {
+    font-size: 16px;
+  }
+
+  #terminal {
+    font-size: 15px;
+    overflow-x: auto;
+  }
+
+  .alert {
+    font-size: 16px;
+  }
+}
+</style>
+    </head>
+    <body>
+        <div id="safariErr" style="display: none"><p align="center" style="color: red">This tool is not supported on Safari browser!</p>
+        </div>
+        
+        <div class="container" id="main">
+            <div style="text-align: right; margin-top: 15px">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="debugLogging" value="">
+                    <label class="form-check-label" for="debugLogging">Show Debug log</label>
+                </div>
+            </div>
+
+            <hr style="margin-top: 10px">
+            
+            <div id="program">
+                <h3> XIAO nRF52840 書き込みツール </h3>
+                <label for="baudrates" id="lblBaudrate">Baudrate:</label>
+                <label style="display: none" id="lblConnTo">Connected to device: </label>
+                <select name="baudrates" id="baudrates">
+                    <option value="921600">921600</option>
+                    <option value="460800">460800</option>
+                    <option value="230400">230400</option>
+                    <option value="115200">115200</option>
+                </select>
+
+                <br><br>
+
+                <input class="btn btn-info btn-sm" type="button" id="connectButton" value="Connect">
+                <input class="btn btn-warning btn-sm" type="button" id="disconnectButton" value="Disconnect">
+                <input class="btn btn-danger btn-sm" type="button" id="eraseButton" value="Erase Flash">
+                <br>
+
+                <div class="alert alert-danger alert-dismissible" id="alertDiv" style="margin-top: 10px; display: none">
+                    <a href="#" class="close" aria-label="close" onclick="$('.alert').hide()">×</a>
+                    <span id="alertmsg"></span>
+                </div>
+
+                <div id="files">
+                    <table class="table table-striped" id="fileTable">
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>
+                    <br>
+                    <input class="btn btn-info btn-sm" type="button" id="programButton" value="Program">
+                </div>
+
+                <output id="list"></output>
+                <hr>
+            </div>
+
+            <div id="terminal" style="background-color: #000; border-radius: 4px; margin-bottom: 20px; padding: 10px"></div>
+        </div>
+        <script src="./js/typescript.4c11f8a6.js" type="module"></script>
+        <script>var isSafari = /constructor/i.test(window.HTMLElement) || function(p) {
+    return p.toString() === "[object SafariRemoteNotification]";
+}(!window['safari'] || typeof safari !== 'undefined' && window['safari'].pushNotification);
+if (isSafari) {
+    document.getElementById("safariErr").style.display = "inline";
+    document.getElementById("main").style.display = "none";
+}
+
+</script>
+    
+</body></html>
