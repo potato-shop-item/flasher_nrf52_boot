@@ -11,7 +11,14 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
          <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-		<style>#fileTable tr {
+		<style>#programButton {
+  min-width: 240px;
+  min-height: 50px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#fileTable tr {
   flex-direction: column;
   display: flex;
 }
@@ -114,35 +121,42 @@
             <hr style="margin-top: 10px">
             
             <div id="program">
-                <h3> XIAO nRF52840 書き込みツール </h3>
-                <label for="baudrates" id="lblBaudrate">Baudrate:</label>
-                <label style="display: none" id="lblConnTo">Connected to device: </label>
-                <select name="baudrates" id="baudrates">
-                    <option value="921600">921600</option>
-                    <option value="460800">460800</option>
-                    <option value="230400">230400</option>
-                    <option value="115200">115200</option>
-                </select>
+                <h3>XIAO nRF52840 Bootloader 更新ツール</h3>
 
-                <br><br>
+                <p style="margin-bottom: 16px">
+                    XIAO nRF52840をBootloaderモードにしてから、
+                    「Bootloaderを更新」を押してください。
+                </p>
 
-                <input class="btn btn-info btn-sm" type="button" id="connectButton" value="Connect">
-                <input class="btn btn-warning btn-sm" type="button" id="disconnectButton" value="Disconnect">
-                <input class="btn btn-danger btn-sm" type="button" id="eraseButton" value="Erase Flash">
-                <br>
+                <!--
+                    index.tsとの互換性のためIDは残す。
+                    購入者向け画面では表示しない。
+                -->
+                <div style="display: none">
+                    <label for="baudrates" id="lblBaudrate">Baudrate:</label>
+                    <label id="lblConnTo">Connected to device:</label>
+
+                    <select name="baudrates" id="baudrates">
+                        <option value="115200" selected="">115200</option>
+                    </select>
+
+                    <input type="button" id="connectButton" value="Connect">
+                    <input type="button" id="disconnectButton" value="Disconnect">
+                    <input type="button" id="eraseButton" value="Erase Flash">
+                </div>
 
                 <div class="alert alert-danger alert-dismissible" id="alertDiv" style="margin-top: 10px; display: none">
                     <a href="#" class="close" aria-label="close" onclick="$('.alert').hide()">×</a>
                     <span id="alertmsg"></span>
                 </div>
 
-                <div id="files">
-                    <table class="table table-striped" id="fileTable">
+                <div id="files" style="display: block">
+                    <table class="table" id="fileTable">
                         <tbody id="tableBody">
                         </tbody>
                     </table>
-                    <br>
-                    <input class="btn btn-info btn-sm" type="button" id="programButton" value="Program">
+
+                    <input class="btn btn-info btn-sm" type="button" id="programButton" value="Bootloaderを更新">
                 </div>
 
                 <output id="list"></output>
