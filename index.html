@@ -125,22 +125,24 @@
 
                 <p style="margin-bottom: 16px">
                     XIAO nRF52840をBootloaderモードにしてから、
-                    「Bootloaderを更新」を押してください。
+                    「XIAOに接続」を押してください。
                 </p>
 
-                <!--
-                    index.tsとの互換性のためIDは残す。
-                    購入者向け画面では表示しない。
-                -->
+                <!-- XIAO接続・Bootloader確認 -->
+                <div style="margin-bottom: 16px">
+                    <input class="btn btn-primary btn-sm" type="button" id="connectButton" value="XIAOに接続">
+
+                    <label id="lblConnTo" style="display: none"></label>
+                </div>
+
+                <!-- index.tsとの互換性のため残す -->
                 <div style="display: none">
                     <label for="baudrates" id="lblBaudrate">Baudrate:</label>
-                    <label id="lblConnTo">Connected to device:</label>
 
                     <select name="baudrates" id="baudrates">
                         <option value="115200" selected="">115200</option>
                     </select>
 
-                    <input type="button" id="connectButton" value="Connect">
                     <input type="button" id="disconnectButton" value="Disconnect">
                     <input type="button" id="eraseButton" value="Erase Flash">
                 </div>
@@ -165,7 +167,7 @@
 
             <div id="terminal" style="background-color: #000; border-radius: 4px; margin-bottom: 20px; padding: 10px"></div>
         </div>
-        <script src="./js/typescript.6db6445d.js" type="module"></script>
+        <script src="./js/typescript.e21931df.js" type="module"></script>
         <script>var isSafari = /constructor/i.test(window.HTMLElement) || function(p) {
     return p.toString() === "[object SafariRemoteNotification]";
 }(!window['safari'] || typeof safari !== 'undefined' && window['safari'].pushNotification);
