@@ -7,8 +7,6 @@
         <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
         <link rel="icon" href="favicon.ee2246ac.ico">
          <script src="https://cdn.jsdelivr.net/npm/xterm@4.19.0/lib/xterm.min.js"></script>
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
          <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 		<style>#programButton {
   min-width: 240px;
@@ -79,17 +77,6 @@
     font-size: 20px;
   }
 
-  #debugLogging {
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-  }
-
-  .form-check-label {
-    margin-left: 5px;
-    font-size: 16px;
-  }
-
   .table {
     font-size: 16px;
   }
@@ -106,14 +93,14 @@
 </style>
     </head>
     <body>
-        <div id="safariErr" style="display: none"><p align="center" style="color: red">This tool is not supported on Safari browser!</p>
+        <div id="safariErr" style="display: none">
+            <p style="text-align: center; color: red; margin: 20px; font-size: 18px">
+                このブラウザではBootloader更新機能を使用できません。<br>
+                WebUSB対応ブラウザを使用してください。
+            </p>
         </div>
         
         <div class="container" id="main">
-            <div style="display: none">
-                <input class="form-check-input" type="checkbox" id="debugLogging" value="">
-            </div>
-            
             <div id="program">
                 <h3>XIAO nRF52840 Bootloader 更新ツール</h3>
                 <div style="border: 1px solid #d0d0d0; border-radius: 6px; margin: 12px 0 18px; padding: 12px; line-height: 1.6">
@@ -133,7 +120,7 @@
                 </div>
 
                 <div class="alert alert-danger alert-dismissible" id="alertDiv" style="margin-top: 10px; display: none">
-                    <a href="#" class="close" aria-label="close" onclick="$('.alert').hide()">×</a>
+                    <a href="#" class="close" aria-label="close" onclick="document.getElementById('alertDiv').style.display='none'; return false;">×</a>
                     <span id="alertmsg"></span>
                 </div>
 
@@ -152,12 +139,9 @@
 
             <div id="terminal" style="background-color: #000; border-radius: 4px; margin-bottom: 20px; padding: 10px"></div>
         </div>
-        <script src="./js/typescript.6ff02c13.js" type="module"></script>
-        <script>var isSafari = /constructor/i.test(window.HTMLElement) || function(p) {
-    return p.toString() === "[object SafariRemoteNotification]";
-}(!window['safari'] || typeof safari !== 'undefined' && window['safari'].pushNotification);
-if (isSafari) {
-    document.getElementById("safariErr").style.display = "inline";
+        <script src="./js/typescript.d2ae4f57.js" type="module"></script>
+        <script>if (!navigator.usb) {
+    document.getElementById("safariErr").style.display = "block";
     document.getElementById("main").style.display = "none";
 }
 
