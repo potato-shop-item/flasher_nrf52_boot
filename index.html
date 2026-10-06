@@ -7,7 +7,6 @@
         <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
         <link rel="icon" href="favicon.ee2246ac.ico">
          <script src="https://cdn.jsdelivr.net/npm/xterm@4.19.0/lib/xterm.min.js"></script>
-         <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js"></script>
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
          <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
@@ -132,22 +131,6 @@
                        XIAO nRF52840 Bootloaderを選択してください。<br>
                     5. 更新が完了するまでUSBケーブルを抜かないでください。
                 </div>
-                <!--
-                    index.tsとの互換性のためIDは残す。
-                    購入者向け画面では表示しない。
-                -->
-                <div style="display: none">
-                    <label for="baudrates" id="lblBaudrate">Baudrate:</label>
-                    <label id="lblConnTo">Connected to device:</label>
-
-                    <select name="baudrates" id="baudrates">
-                        <option value="115200" selected="">115200</option>
-                    </select>
-
-                    <input type="button" id="connectButton" value="Connect">
-                    <input type="button" id="disconnectButton" value="Disconnect">
-                    <input type="button" id="eraseButton" value="Erase Flash">
-                </div>
 
                 <div class="alert alert-danger alert-dismissible" id="alertDiv" style="margin-top: 10px; display: none">
                     <a href="#" class="close" aria-label="close" onclick="$('.alert').hide()">×</a>
@@ -169,7 +152,7 @@
 
             <div id="terminal" style="background-color: #000; border-radius: 4px; margin-bottom: 20px; padding: 10px"></div>
         </div>
-        <script src="./js/typescript.e663e6fc.js" type="module"></script>
+        <script src="./js/typescript.6ff02c13.js" type="module"></script>
         <script>var isSafari = /constructor/i.test(window.HTMLElement) || function(p) {
     return p.toString() === "[object SafariRemoteNotification]";
 }(!window['safari'] || typeof safari !== 'undefined' && window['safari'].pushNotification);
