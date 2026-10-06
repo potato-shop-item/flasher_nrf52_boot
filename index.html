@@ -104,21 +104,16 @@
             <div id="program">
                 <h3>XIAO nRF52840 Bootloader 更新ツール</h3>
                 <div style="border: 1px solid #d0d0d0; border-radius: 6px; margin: 12px 0 18px; padding: 12px; line-height: 1.6">
-                  <strong>このツールについて</strong><br>
-                  このツールは、XIAO nRF52840 の Bootloader を
-                  0.6.1 から 0.11.0 へ更新するための専用ツールです。<br>
-                  Bootloader 0.11.0 へ更新済みの端末では実行しないでください。
+                  XIAO nRF52840のBootloaderを
+                  0.6.1から0.11.0へ更新します。<br>
+                  <strong>更新済みの端末では実行しないでください。</strong>
                 </div>
                 <div style="margin-bottom: 18px; line-height: 1.7">
-                    <strong>更新手順</strong><br>
-                    1. XIAO nRF52840をUSBケーブルで接続します。<br>
-                    2. RESETボタンを素早く2回押して、Bootloaderモードにします。<br>
-                    3. 「Bootloaderを更新」を押します。<br>
-                    4. USBデバイスの選択画面が表示されたら、
-                       XIAO nRF52840 Bootloaderを選択してください。<br>
-                    5. 更新が完了するまでUSBケーブルを抜かないでください。
+                  XIAO nRF52840をUSB接続し、
+                  RESETボタンを素早く2回押してBootloaderモードにします。<br>
+                  「Bootloaderを更新」を押し、
+                  XIAO nRF52840 Bootloaderを選択してください。
                 </div>
-
                 <div class="alert alert-danger alert-dismissible" id="alertDiv" style="margin-top: 10px; display: none">
                     <a href="#" class="close" aria-label="close" onclick="document.getElementById('alertDiv').style.display='none'; return false;">×</a>
                     <span id="alertmsg"></span>
@@ -139,7 +134,7 @@
 
             <div id="terminal" style="background-color: #000; border-radius: 4px; margin-bottom: 20px; padding: 10px"></div>
         </div>
-        <script src="./js/typescript.b82ddf30.js" type="module"></script>
+        <script src="./js/typescript.9691e3fb.js" type="module"></script>
         <script>if (!navigator.usb) {
     document.getElementById("safariErr").style.display = "block";
     document.getElementById("main").style.display = "none";
