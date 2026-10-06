@@ -1,181 +1,198 @@
-<!DOCTYPE html><html><head>
-        <meta charset="utf-8">
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Potato Tool</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.19.0/css/xterm.css">
-        <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
-        <link rel="icon" href="favicon.ee2246ac.ico">
+        <link
+            href="https://fonts.googleapis.com/css?family=Orbitron"
+            rel="stylesheet"
+        />
+        <link rel="icon" href="../assets/favicon.ico" />
          <script src="https://cdn.jsdelivr.net/npm/xterm@4.19.0/lib/xterm.min.js"></script>
          <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js"></script>
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
          <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-		<style>#programButton {
-  min-width: 240px;
-  min-height: 50px;
-  font-size: 18px;
-  font-weight: 600;
-}
+		<style>
+            #programButton {
+                min-width: 240px;
+                min-height: 50px;
+                font-size: 18px;
+                font-weight: 600;
+            }
 
-#fileTable tr {
-  flex-direction: column;
-  display: flex;
-}
+			/* ファイル選択とプログレスバーをPC・スマホとも2段表示 */
+			#fileTable tr {
+			    display: flex;
+			    flex-direction: column;
+			}
 
-#fileTable td {
-  width: 100%;
-  display: block;
-}
+			#fileTable td {
+			    display: block;
+			    width: 100%;
+			}
 
-#fileTable .progress-cell {
-  width: 100%;
-  padding-top: 8px;
-}
+			#fileTable .progress-cell {
+			    width: 100%;
+			    padding-top: 8px;
+			}
 
-#fileTable progress {
-  width: 100%;
-  height: 24px;
-  display: block;
-}
+			#fileTable progress {
+			    display: block;
+			    width: 100%;
+			    height: 24px;
+			}
 
-@media (width <= 600px) {
-  body {
-    font-size: 18px;
-  }
+		    /* スマートフォン向け表示 */
+		    @media (max-width: 600px) {
+		        body {
+		            font-size: 18px;
+		        }
 
-  .container {
-    width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
+		        .container {
+		            width: 100%;
+		            padding-left: 16px;
+		            padding-right: 16px;
+		        }
 
-  h3 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 26px;
-  }
+		        h3 {
+		            font-size: 26px;
+		            margin-top: 20px;
+		            margin-bottom: 20px;
+		        }
 
-  label {
-    font-size: 18px;
-  }
+		        label {
+		            font-size: 18px;
+		        }
 
-  #baudrates {
-    height: 46px;
-    margin-left: 6px;
-    padding: 6px 10px;
-    font-size: 18px;
-  }
+		        #baudrates {
+		            font-size: 18px;
+		            height: 46px;
+		            padding: 6px 10px;
+		            margin-left: 6px;
+		        }
 
-  .btn-sm {
-    min-height: 50px;
-    margin: 5px 3px;
-    padding: 12px 16px;
-    font-size: 18px;
-  }
+		        .btn-sm {
+		            font-size: 18px;
+		            padding: 12px 16px;
+		            min-height: 50px;
+		            margin: 5px 3px;
+		        }
 
-  #programButton {
-    width: 100%;
-    min-height: 56px;
-    font-size: 20px;
-  }
+		        #programButton {
+		            width: 100%;
+		            min-height: 56px;
+		            font-size: 20px;
+		        }
 
-  #debugLogging {
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-  }
+		        #debugLogging {
+		            width: 20px;
+		            height: 20px;
+		            vertical-align: middle;
+		        }
 
-  .form-check-label {
-    margin-left: 5px;
-    font-size: 16px;
-  }
+		        .form-check-label {
+		            font-size: 16px;
+		            margin-left: 5px;
+		        }
 
-  .table {
-    font-size: 16px;
-  }
+		        .table {
+		            font-size: 16px;
+		        }
 
-  #terminal {
-    font-size: 15px;
-    overflow-x: auto;
-  }
+		        #terminal {
+		            font-size: 15px;
+		            overflow-x: auto;
+		        }
 
-  .alert {
-    font-size: 16px;
-  }
-}
-</style>
+		        .alert {
+		            font-size: 16px;
+		        }
+		    }
+		</style>
     </head>
     <body>
-        <div id="safariErr" style="display: none"><p align="center" style="color: red">This tool is not supported on Safari browser!</p>
+        <div id="safariErr" style="display:none"><p align="center" style="color:red">This tool is not supported on Safari browser!</p>
         </div>
         
         <div class="container" id="main">
-            <div style="text-align: right; margin-top: 15px">
+            <div style="margin-top: 15px; text-align: right;">
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="debugLogging" value="">
                     <label class="form-check-label" for="debugLogging">Show Debug log</label>
                 </div>
             </div>
 
-            <hr style="margin-top: 10px">
+            <hr style="margin-top: 10px;"/>
             
             <div id="program">
                 <h3>XIAO nRF52840 Bootloader 更新ツール</h3>
 
-                <p style="margin-bottom: 16px">
+                <p style="margin-bottom: 16px;">
                     XIAO nRF52840をBootloaderモードにしてから、
-                    「XIAOに接続」を押してください。
+                    「Bootloaderを更新」を押してください。
                 </p>
 
-                <!-- XIAO接続・Bootloader確認 -->
-                <div style="margin-bottom: 16px">
-                    <input class="btn btn-primary btn-sm" type="button" id="connectButton" value="XIAOに接続">
-
-                    <label id="lblConnTo" style="display: none"></label>
-                </div>
-
-                <!-- index.tsとの互換性のため残す -->
-                <div style="display: none">
+                <!--
+                    index.tsとの互換性のためIDは残す。
+                    購入者向け画面では表示しない。
+                -->
+                <div style="display:none;">
                     <label for="baudrates" id="lblBaudrate">Baudrate:</label>
+                    <label id="lblConnTo">Connected to device:</label>
 
                     <select name="baudrates" id="baudrates">
-                        <option value="115200" selected="">115200</option>
+                        <option value="115200" selected>115200</option>
                     </select>
 
-                    <input type="button" id="disconnectButton" value="Disconnect">
-                    <input type="button" id="eraseButton" value="Erase Flash">
+                    <input type="button" id="connectButton" value="Connect" />
+                    <input type="button" id="disconnectButton" value="Disconnect" />
+                    <input type="button" id="eraseButton" value="Erase Flash" />
                 </div>
 
-                <div class="alert alert-danger alert-dismissible" id="alertDiv" style="margin-top: 10px; display: none">
-                    <a href="#" class="close" aria-label="close" onclick="$('.alert').hide()">×</a>
+                <div class="alert alert-danger alert-dismissible"
+                     id="alertDiv"
+                     style="display:none; margin-top:10px">
+                    <a href="#"
+                       class="close"
+                       aria-label="close"
+                       onclick="$('.alert').hide()">&times;</a>
                     <span id="alertmsg"></span>
                 </div>
 
-                <div id="files" style="display: block">
+                <div id="files" style="display:block;">
                     <table class="table" id="fileTable">
                         <tbody id="tableBody">
                         </tbody>
                     </table>
 
-                    <input class="btn btn-info btn-sm" type="button" id="programButton" value="Bootloaderを更新">
+                    <input
+                        class="btn btn-info btn-sm"
+                        type="button"
+                        id="programButton"
+                        value="Bootloaderを更新"
+                    />
                 </div>
 
                 <output id="list"></output>
-                <hr>
+                <hr/>
             </div>
 
-            <div id="terminal" style="background-color: #000; border-radius: 4px; margin-bottom: 20px; padding: 10px"></div>
+            <div id="terminal" style="background-color: #000; padding: 10px; border-radius: 4px; margin-bottom: 20px;"></div>
         </div>
-        <script src="./js/typescript.61d46ab8.js" type="module"></script>
-        <script>var isSafari = /constructor/i.test(window.HTMLElement) || function(p) {
-    return p.toString() === "[object SafariRemoteNotification]";
-}(!window['safari'] || typeof safari !== 'undefined' && window['safari'].pushNotification);
-if (isSafari) {
-    document.getElementById("safariErr").style.display = "inline";
-    document.getElementById("main").style.display = "none";
-}
+        <script src="index.ts" type="module"></script>
+        <script>
+            var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
 
-</script>
-    
-</body></html>
+            if(isSafari)
+            {
+               document.getElementById("safariErr").style.display = "inline";
+               document.getElementById("main").style.display = "none";
+            }
+        </script>
+    </body>
+</html>
